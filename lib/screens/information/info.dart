@@ -3,16 +3,21 @@ import 'package:flutter/material.dart';
 class Welcome extends StatelessWidget {
 
 
-  //String name,email,phone;
+  late String firstname;
   //Welcome({[String name], [String email],[String phone]});
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.purple
+      body: Center(
+        child: Container(
+          child: Text(firstname),
+          width: 200,
+          height: 200,
+          decoration: BoxDecoration(
+            color: Colors.purple
+          ),
         ),
       ),
     );
