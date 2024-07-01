@@ -1,17 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
 
-var Inputdata= TextEditingController();
+
 
 
 class CustomContainer extends StatelessWidget {
   final String label;
   final myicon;
+  final TextEditingController nameController;
 
+  CustomContainer(
+      {Key? key, required this.nameController, required this.label, required this.myicon}
+      ):super(key: key);
 
-
-  CustomContainer(this.label, this.myicon);
 
 
   @override
@@ -19,13 +22,14 @@ class CustomContainer extends StatelessWidget {
     return Container(
         margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: TextField(
-          controller: Inputdata,
+          controller: nameController,
           decoration: InputDecoration(
             labelText: label,
             prefixIcon: Icon(myicon),
             border: OutlineInputBorder(),
             //hintText: 'Enter Your Email',
           ),
+
         ));
   }
 }

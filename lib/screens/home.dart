@@ -23,9 +23,9 @@ class _HomeState extends State<Home> {
   double _currentSliderValue = 18;
   String? _selectedItem; // Make _selectedItem nullable
 
-  TextEditingController _phoneNumber= TextEditingController();
-  TextEditingController _name= TextEditingController();
-  TextEditingController _email= TextEditingController();
+  TextEditingController phoneController= TextEditingController();
+  TextEditingController nameController= TextEditingController();
+  TextEditingController emailController= TextEditingController();
 
   // List of genders for the dropdown
   List<String> _genderItems = [
@@ -54,79 +54,59 @@ class _HomeState extends State<Home> {
             children: [
               ImageChoice(),
               SizedBox(height: 10),
-              Container(
-                  margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: TextField(
-                    controller: _name,
-                    decoration: InputDecoration(
-                      labelText: "Enter your Name",
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(),
-                      //hintText: 'Enter Your Email',
-                    ),
-                  )),
-              //CustomContainer('Enter your Name', Icons.person),
+              CustomContainer(nameController: nameController, label: "Name", myicon: Icons.person,),
               SizedBox(height: 22.5),
-              Container(
-              margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child:
-              IntlPhoneField(
-                controller: _phoneNumber,
-                decoration: const InputDecoration(
-                  hintText: 'Enter Phone Number',
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black,
-                    width: 5)
-                  )
-                ),
-              ),),
+              IntlPhoneNum(phoneController: phoneController),
+              // Container(
+              // margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              // child:
+              // IntlPhoneField(
+              //   controller: phoneController,
+              //   decoration: const InputDecoration(
+              //     hintText: 'Enter Phone Number',
+              //     border: OutlineInputBorder(
+              //       borderSide: BorderSide(color: Colors.black,
+              //       width: 5)
+              //     )
+              //   ),
+              // ),),
               SizedBox(height: 22.5),
-              Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: Border.all(color: Colors.black.withOpacity(0.5), width: 1.0),
-                    color: Colors.white,
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 12.0),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: _selectedItem,
-                      hint: Text('Select your Gender'),
-                      icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: TextStyle(color: Colors.black, fontSize: 18.0),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _selectedItem = newValue; // Update selected item
-                        });
-                      },
-                      items: _genderItems.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ),
-              ),
-
+              MyDropdownWidget(),
+              // Container(
+              //   margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              //   child: Container(
+              //     width: double.infinity,
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(8.0),
+              //       border: Border.all(color: Colors.black.withOpacity(0.5), width: 1.0),
+              //       color: Colors.white,
+              //     ),
+              //     padding: EdgeInsets.symmetric(horizontal: 12.0),
+              //     child: DropdownButtonHideUnderline(
+              //       child: DropdownButton<String>(
+              //         value: _selectedItem,
+              //         hint: Text('Select your Gender'),
+              //         icon: Icon(Icons.arrow_drop_down, color: Colors.black),
+              //         iconSize: 24,
+              //         elevation: 16,
+              //         style: TextStyle(color: Colors.black, fontSize: 18.0),
+              //         onChanged: (String? newValue) {
+              //           setState(() {
+              //             _selectedItem = newValue; // Update selected item
+              //           });
+              //         },
+              //         items: _genderItems.map<DropdownMenuItem<String>>((String value) {
+              //           return DropdownMenuItem<String>(
+              //             value: value,
+              //             child: Text(value),
+              //           );
+              //         }).toList(),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               SizedBox(height: 22.5),
-              Container(
-                  margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                  child: TextField(
-                    controller: _name,
-                    decoration: InputDecoration(
-                      labelText: "Enter your Name",
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(),
-                      //hintText: 'Enter Your Email',
-                    ),
-                  )),
+              CustomContainer( nameController: emailController, label: 'Enter Email', myicon: Icons.message,),
               SizedBox(height: 22.5),
               Container(
                 margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -160,13 +140,16 @@ class _HomeState extends State<Home> {
 
               ElevatedButton(
                 onPressed: () {
-                  print(_currentSliderValue);
-                  print(_selectedItem);
-                  print(_phoneNumber.text);
-                  print(_name.text);
-                  print(_email.text);
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => Page1(sel_item: _selectedItem as String,
-                      slider_val: _currentSliderValue, sel_name: _name.text, sel_email: _email.text, sel_phone:_phoneNumber.text,)));
+                  // print(_currentSliderValue);
+                  // print(_selectedItem);
+                  // print(_phoneNumber.text);
+                  print(nameController.text);
+                  print(emailController.text);
+                  print(phoneController.text);
+                  // print(_name.text);
+                  // print(_email.text);
+                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => Page1(sel_item: _selectedItem as String,
+                  //     slider_val: _currentSliderValue, sel_name: _name.text, sel_email: _email.text, sel_phone:_phoneNumber.text,)));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
