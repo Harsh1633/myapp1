@@ -8,10 +8,7 @@ void main() {
     MaterialApp(
       // initialRoute: '/info',
       home: Home(),
-    routes: {
-      '/home': (context) => Home(),
-      '/info': (context) => Welcome()
-    },),
+    ),
   );
 }
 

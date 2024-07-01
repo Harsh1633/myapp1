@@ -43,4 +43,9 @@ class _SlideState extends State<Slide> {
       ),
     );
   }
+
+  double abc(){
+    return _currentSliderValue;
+  }
 }
+

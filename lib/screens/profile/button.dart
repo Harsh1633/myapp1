@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp1/screens/information/info.dart';
+import 'package:myapp1/screens/profile/text.dart';
 
 class SaveButton extends StatefulWidget {
   final String btext;
@@ -17,7 +18,7 @@ class _SaveButtonState extends State<SaveButton> {
     final String nametext;
     return ElevatedButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Welcome(nametext)));
+          //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Welcome("Harsh", "ABC", "123")));
         },//String uEmail= emailText.text.toString()},
         style: ElevatedButton.styleFrom(
           backgroundColor: widget.back_color,//
