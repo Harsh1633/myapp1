@@ -1,89 +1,129 @@
 import 'package:flutter/material.dart';
+import 'package:myapp1/screens/home.dart';
+import 'package:myapp1/screens/profile/button.dart';
 
 
 class Page1 extends StatelessWidget {
-  final String sel_item, sel_email,sel_name,sel_phone;
-  final double slider_val;
-  const Page1({required this.sel_name,required this.sel_phone,required this.sel_item,required this.sel_email, required this.slider_val, super.key});
+
+  final String selected_name,selected_phonenum,selected_gender,selected_email,selected_date;
+  Page1({required this.selected_name,
+    required this.selected_phonenum,
+    required this.selected_gender,
+    required this.selected_email,
+    required this.selected_date});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home:Scaffold(
-      body:Center(
-      child: Container(
-        // width: 200,
-        // height: 200,
-        decoration: BoxDecoration(
-            color: Colors.blue
+        appBar: AppBar(
+          title: Text("View Details"),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 30,
+            fontStyle: FontStyle.italic,
+          ),
+          backgroundColor: Color.fromRGBO(255, 235, 216, 1.0),
+          centerTitle: true,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Name :"),
-                //SizedBox(width: 100),
-                Text(sel_name,style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                ),)
-
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Email:"),
-                //SizedBox(width: 100),
-                Text(sel_email,style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                ),)
-
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Age :"),
-                //SizedBox(width: 100),
-                Text("$slider_val",style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                ),)
-
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Gender :"),
-                //SizedBox(width: 100),
-                Text(sel_item,style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                ),)
-
-              ],
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Number :"),
-                //SizedBox(width: 100),
-                Text(sel_phone,style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black
-                ),)
-
-              ],
-            ),
-          ]
-          ,
+      body:Container(
+        child: Center(
+          child: Column(
+            //mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                      child: Text("Name: ",style: TextStyle(fontSize: 15,color: Colors.red)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                      child: Text(selected_name,style: TextStyle(fontSize: 30,color: Colors.black)),
+                    ),
+                  ],
+                )
+              ),
+              Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                        child: Text("Email: ",style: TextStyle(fontSize: 15,color: Colors.red)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                        child: Text(selected_email,style: TextStyle(fontSize: 30,color: Colors.black)),
+                      ),
+                    ],
+                  )
+              ),
+              Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                        child: Text("Phone Number: ",style: TextStyle(fontSize: 15,color: Colors.red)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                        child: Text(selected_phonenum,style: TextStyle(fontSize: 30,color: Colors.black)),
+                      ),
+                    ],
+                  )
+              ),
+              Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                        child: Text("Gender: ",style: TextStyle(fontSize: 15,color: Colors.red)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                        child: Text(selected_gender,style: TextStyle(fontSize: 30,color: Colors.black)),
+                      ),
+                    ],
+                  )
+              ),
+              Container(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                        child: Text("Date: ",style: TextStyle(fontSize: 15,color: Colors.red)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 20, 0, 0),
+                        child: Text(selected_date,style: TextStyle(fontSize: 30,color: Colors.black),),
+                      ),
+                    ],
+                  )
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push
+                      (MaterialPageRoute(
+                        builder: (context)=> Home()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    elevation: 15.0,
+                    textStyle: const TextStyle(
+                      color: Colors.purple,
+                      fontSize: 25,
+                    ),
+                  ),
+                  child: Text("EDIT"),
+                ),
+              )
+              //const SaveButton(buttonText: "buttonText")
+            ],
+          ),
         ),
-      ),
-    )));
+      )));
   }
 }
 

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl/intl.dart';
 import 'package:myapp1/screens/information/info.dart';
 import 'package:myapp1/screens/profile/button.dart';
-import 'package:myapp1/screens/profile/datepicker.dart';
-import 'package:myapp1/screens/profile/dropdown.dart';
+import 'package:myapp1/screens/profile/date.dart';
+import 'package:myapp1/screens/profile/final_dropdown.dart';
 import 'package:myapp1/screens/profile/image.dart';
 import 'package:myapp1/screens/profile/intlphonenum.dart';
-import 'package:myapp1/screens/profile/slider.dart';
 import 'package:myapp1/screens/profile/text.dart';
 
 
@@ -20,23 +19,27 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  double _currentSliderValue = 18;
-  String? _selectedItem; // Make _selectedItem nullable
+
+  String? _selectedGender;
 
   TextEditingController phoneController= TextEditingController();
   TextEditingController nameController= TextEditingController();
   TextEditingController emailController= TextEditingController();
+  TextEditingController dateController = TextEditingController();
 
-  // List of genders for the dropdown
-  List<String> _genderItems = [
-    'Male',
-    'Female',
-    'Other',
-  ];
+
+  DateTime? selectedDate;
+  void setDate(DateTime? date){
+    setState(() {
+      selectedDate= date;
+    });
+  }
+
 
 
   @override
   Widget build(BuildContext context) {
+    String? handleSelectedDate;
     return Scaffold(
       appBar: AppBar(
         title: Text("My First App"),
@@ -57,110 +60,31 @@ class _HomeState extends State<Home> {
               CustomContainer(nameController: nameController, label: "Name", myicon: Icons.person,),
               SizedBox(height: 22.5),
               IntlPhoneNum(phoneController: phoneController),
-              // Container(
-              // margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              // child:
-              // IntlPhoneField(
-              //   controller: phoneController,
-              //   decoration: const InputDecoration(
-              //     hintText: 'Enter Phone Number',
-              //     border: OutlineInputBorder(
-              //       borderSide: BorderSide(color: Colors.black,
-              //       width: 5)
-              //     )
-              //   ),
-              // ),),
               SizedBox(height: 22.5),
-              MyDropdownWidget(),
-              // Container(
-              //   margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              //   child: Container(
-              //     width: double.infinity,
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(8.0),
-              //       border: Border.all(color: Colors.black.withOpacity(0.5), width: 1.0),
-              //       color: Colors.white,
-              //     ),
-              //     padding: EdgeInsets.symmetric(horizontal: 12.0),
-              //     child: DropdownButtonHideUnderline(
-              //       child: DropdownButton<String>(
-              //         value: _selectedItem,
-              //         hint: Text('Select your Gender'),
-              //         icon: Icon(Icons.arrow_drop_down, color: Colors.black),
-              //         iconSize: 24,
-              //         elevation: 16,
-              //         style: TextStyle(color: Colors.black, fontSize: 18.0),
-              //         onChanged: (String? newValue) {
-              //           setState(() {
-              //             _selectedItem = newValue; // Update selected item
-              //           });
-              //         },
-              //         items: _genderItems.map<DropdownMenuItem<String>>((String value) {
-              //           return DropdownMenuItem<String>(
-              //             value: value,
-              //             child: Text(value),
-              //           );
-              //         }).toList(),
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              DropDown(
+                  selectedGender: _selectedGender,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedGender = newValue;
+                    });
+                  }),
               SizedBox(height: 22.5),
               CustomContainer( nameController: emailController, label: 'Enter Email', myicon: Icons.message,),
               SizedBox(height: 22.5),
-              Container(
-                margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Row(
-                  children: [
-                    Text(
-                      "Age",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color.fromRGBO(128, 128, 135, 1),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Slider(
-                        value: _currentSliderValue,
-                        min: 18,
-                        max: 100,
-                        divisions: 82,
-                        label: _currentSliderValue.toInt().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _currentSliderValue = value;
-                          });
-                        },
-                      ),
-                    )
-                  ],
-                ),
+              Date(callback: setDate),
+              SaveButton(name: nameController.text,
+                phone: phoneController.text,
+              gender: _selectedGender ?? "",
+                  date:  selectedDate != null ? DateFormat('yyyy-MM-dd').format(selectedDate!) : "",
+                email: emailController.text,
               ),
-
-              ElevatedButton(
-                onPressed: () {
-                  // print(_currentSliderValue);
-                  // print(_selectedItem);
-                  // print(_phoneNumber.text);
-                  print(nameController.text);
-                  print(emailController.text);
-                  print(phoneController.text);
-                  // print(_name.text);
-                  // print(_email.text);
-                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => Page1(sel_item: _selectedItem as String,
-                  //     slider_val: _currentSliderValue, sel_name: _name.text, sel_email: _email.text, sel_phone:_phoneNumber.text,)));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  elevation: 15.0,
-                  textStyle: const TextStyle(
-                    color: Colors.purple,
-                    fontSize: 25,
-                  ),
-                ),
-                child: Text("SAVE"),
-              ),
+              // SaveButton(
+              //   nameController.text,
+              //   phoneController.text,
+              //   _selectedGender ?? "",
+              //   selectedDate != null ? DateFormat('yyyy-MM-dd').format(selectedDate!) : "",
+              //   emailController.text, buttonText: 'SAVE',
+              // )
             ],
           ),
         ],

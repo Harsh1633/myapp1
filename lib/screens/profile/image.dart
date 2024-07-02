@@ -25,6 +25,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     if (pickedFile != null) {
       setState(() {
         imageFile = FileImage(io.File(pickedFile.path));
+        // print(FileImage);;
       });
     }
   }
