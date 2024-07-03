@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class Date extends StatefulWidget {
   final Function(DateTime?) callback;
+  final String datehint;
 
-  const Date({Key? key, required this.callback}) : super(key: key);
+  const Date({Key? key, required this.callback, required this.datehint}) : super(key: key);
 
   @override
   _DateState createState() => _DateState();
@@ -37,7 +38,7 @@ class _DateState extends State<Date> {
           }
         },
         decoration: InputDecoration(
-          labelText: "Date of Joining",
+          labelText: widget.datehint,
           prefixIcon: IconButton(
             onPressed: () {},
             icon: Icon(Icons.calendar_today),

@@ -4,10 +4,11 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 class IntlPhoneNum extends StatefulWidget {
   final TextEditingController phoneController;
+  final String phonehint;
   //const IntlPhoneNum({super.key, required this.phoneController});
 
   IntlPhoneNum(
-      {Key? key, required this.phoneController}
+      {Key? key, required this.phoneController, required this.phonehint}
       ):super(key: key);
 
   @override
@@ -21,8 +22,9 @@ class _IntlPhoneNumState extends State<IntlPhoneNum> {
       margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: IntlPhoneField(
         controller: widget.phoneController,
-        decoration: const InputDecoration(
-            hintText: 'Enter Phone Number',
+        decoration: InputDecoration(
+            hintText: "phone number",
+            labelText: widget.phonehint,
             border: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.black,
                     width: 5)

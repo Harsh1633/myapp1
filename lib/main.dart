@@ -6,7 +6,6 @@ import 'package:myapp1/screens/information/info.dart';
 void main() {
   runApp(
     MaterialApp(
-      // initialRoute: '/info',
       home: Home(),
     ),
   );
